@@ -120,11 +120,12 @@ public class App {
     private static boolean retrieveAndSave() {
         SourceWrapper sourceWrapper = null;
         if (cmd.hasOption("ga")) {
-            if (!cmd.hasOption("pf")) {
+            //Unnecessary
+            /*if (!cmd.hasOption("pf")) {
                 System.err.println("ERROR - This action (-ga) requires to load a custom configuration (-pf): ");
                 printHelp();
                 return false;
-            }
+            }*/
             String query = cmd.getOptionValue("ga");
             if (query == null)
                 query = properties.getProperty("guardian_api_query");

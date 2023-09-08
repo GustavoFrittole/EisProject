@@ -40,3 +40,4 @@ build/
 ### MyIgnored ##
 results.txt
 saved_articles.csv
+src/main/resources/application.properties
