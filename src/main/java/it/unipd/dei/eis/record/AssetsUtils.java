@@ -15,22 +15,21 @@ import java.util.Scanner;
 public class AssetsUtils {
     private static String filePath = "./saved_articles.csv";
 
-    /**
-     *
-     * @param iterator
-     * @throws IllegalArgumentException
-     * @throws IOException
-     */
     public static void saveArticlesToFile(Iterator<SimpleArticle> iterator) throws IllegalArgumentException, IOException {
         if (iterator == null) {
             throw new IllegalArgumentException("Argomento nullo");
         }
 
-        CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader("Title", "Body");
+        CSVFormat csvFileFormat = CSVFormat.Predefined.Default.getFormat();
+
+        File file = new File(filePath);
+        boolean existed = file.exists();
         try (
-                FileWriter writer = new FileWriter(filePath);
+                FileWriter writer = new FileWriter(file, true);
                 CSVPrinter csvPrinter = new CSVPrinter(writer, csvFileFormat);
         ) {
+            if(!existed)
+                csvPrinter.printRecord("Title", "Body");
             while (iterator.hasNext()) {
                 SimpleArticle simpleArticle = iterator.next();
                 csvPrinter.printRecord(simpleArticle.getTitle(), simpleArticle.getBody());

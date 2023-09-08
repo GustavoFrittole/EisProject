@@ -45,7 +45,7 @@ e li salva in un file locale. Se il file non è indicato nell'argomento
 allora viene letto dal file delle proprietà.
 
     java -jar target/EisProject-<version>-jar-with-dependencies.jar
-        -sf -gu [facoltativo-query] -et
+        -sf -ga [facoltativo-query] -et
 Recupera il numero impostato (file delle proprietà) di articoli tramite le API
 di The Guardian Open Platform e li salva in un file locale. 
 Se la query non è indicata nell'argomento allora viene letta dal file delle proprietà.
@@ -58,11 +58,15 @@ Legge il file su cui sono stati precedentemente salvati degli articoli
 e stampa su di un altro file una lista dei termini
 presenti associati al loro peso (numero di documenti in cui appaiono).
 
+    java -jar target/EisProject-<version>-jar-with-dependencies.jar
+        -sf -ga [facoltativo-query] -cf [facoltativo-file]
+Come sopra specificando fonti multiple.
+
 #### File delle proprietà
 
     src/main/java/resources/application.properties.example
 
-    #necessari per -gu
+    #necessari per -ga
         guardian_api_key=<your-api-key>
         guardian_api_pages=5
         guardian_api_articles_per_page=200
@@ -71,7 +75,7 @@ presenti associati al loro peso (numero di documenti in cui appaiono).
         csv_file_articles=1000
 
     #sovrascritti se specificati come argomento
-        #argomento di -gu
+        #argomento di -ga
             guardian_api_query="your query"
         #argomento di -cf
             csv_file_url=path/to/your/articles.csv
@@ -84,10 +88,17 @@ presenti associati al loro peso (numero di documenti in cui appaiono).
         words_to_print=50
 
 ### NOTE
-I file presenti sotto la carella src/main/java/com/apiguardian/
+- I file presenti sotto la carella src/main/java/com/apiguardian/
 non sono proprietà dell'autore di questo file,
 che ha solo apportato delle modifiche a essi (indicate nei commenti).
 Vedi: https://github.com/matarrese/content-api-the-guardian.git
+- Gli articoli vengono salvati su di un file, saved_articles.csv, che si trova nella cartella principale 
+della repository, la scrittura è impostata su append. Se si vuole eliminare
+gli articoli salvati in precedenza sarà necessario eliminare tale file. Il programma
+non impedità il salvataggio di articoli in multipla copia.
+- Non si assicura che il programma gestisca correttamente richieste di articoli
+superiori a quelle disponibili da una data fonte. Il comportamento generale
+prevede il salvataggio di tutti gli articoli disponibili.
 
 
 
