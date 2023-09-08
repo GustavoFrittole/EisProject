@@ -1,6 +1,6 @@
-# Progetto di esempio in Maven
+# Progetto esame EIS
 
-### Compilare il progetto Maven
+### Compilare il progetto
 
 Scaricare il progetto da github
     
@@ -28,7 +28,7 @@ Nella cartella "target/" verranno generati
 
 Il secondo file jar comprende anche tutte le dipendenze.
 
-### Eseguire il progetto Maven
+### Eseguire il progetto
 
 E' possibile eseguire il programma dalla cartella principale tramite il comando:
 
