@@ -37,6 +37,8 @@ E' possibile eseguire il programma dalla cartella principale tramite il comando:
     java -jar target/EisProject-<version>-jar-with-dependencies.jar <args>
 
 #### Esempi di utilizzo
+Con facoltativo e necesario ci si riferisce algli argomenti delle proprietà, non alle proprietà stesse.
+E necessaria la presenza di -sf oppure -et oppure entrambe.
 
     java -jar target/EisProject-<version>-jar-with-dependencies.jar
         -sf -cf [facoltativo-file] -pf [necessario-file_esterno_delle_proprietà]
