@@ -2,7 +2,7 @@
 
 ### Compilare il progetto Maven
 
-Scaricare il progetto da git / github
+Scaricare il progetto da github
     
     git clone https://github.com/GustavoFrittole/EisProject.git
 
