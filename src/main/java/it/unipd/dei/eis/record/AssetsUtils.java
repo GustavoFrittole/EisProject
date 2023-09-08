@@ -15,6 +15,12 @@ import java.util.Scanner;
 public class AssetsUtils {
     private static String filePath = "./saved_articles.csv";
 
+    /**
+     *
+     * @param iterator
+     * @throws IllegalArgumentException
+     * @throws IOException
+     */
     public static void saveArticlesToFile(Iterator<SimpleArticle> iterator) throws IllegalArgumentException, IOException {
         if (iterator == null) {
             throw new IllegalArgumentException("Argomento nullo");

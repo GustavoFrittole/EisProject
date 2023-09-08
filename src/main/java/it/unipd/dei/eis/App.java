@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+//TODO: SISTEMARE IL CONTATORE DI PAROLE COME DA COMSEGNA (CONTARE SINGOLARMENTE PER OGNI ARTICOLO)
 public class App {
     private static Options options;
     private static CommandLine cmd;
@@ -54,8 +55,7 @@ public class App {
     private static void printHelp() {
         if (formatter == null)
             formatter = new HelpFormatter();
-        formatter.printHelp("Usage:\n" +
-                "app -sa -{ga, cf} <optional_argument> [options]" +
+        formatter.printHelp("app -sa -{ga, cf} <optional_argument> [options]" +
                 "\tto retrieve and save, or\n" +
                 "app -et [options]" +
                 "\tto parse and save, or\n" +
@@ -103,6 +103,9 @@ public class App {
                 properties.load(input);
             } catch (IOException e) {
                 System.err.println("ERROR - Cannot load default configuration:\n" + e.getMessage());
+                return false;
+            } catch (NullPointerException e){
+                System.err.println("ERROR - No property file has been specified and no default configuration has benn set:\n" + e.getMessage());
                 return false;
             } finally {
                 if (input != null) {
