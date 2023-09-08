@@ -39,7 +39,7 @@ E' possibile eseguire il programma dalla cartella principale tramite il comando:
 #### Esempi di utilizzo
 
     java -jar target/EisProject-<version>-jar-with-dependencies.jar
-        -sf -cf [facoltativo-file] -pf [necessatio-file_esterno_delle_proprietà]
+        -sf -cf [facoltativo-file] -pf [necessario-file_esterno_delle_proprietà]
 Recupera il numero impostato (file delle proprietà) di articoli dal dato file
 e li salva in un file locale. Se il file non è indicato nell'argomento
 allora viene letto dal file delle proprietà.
