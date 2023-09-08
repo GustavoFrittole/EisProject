@@ -23,8 +23,8 @@ posizionarsi nella cartella principale e usare l'apposito comando Maven:
 
 Nella cartella "target/" verranno generati
 
-- EisProject-<version>.jar
-- EisProject-<version>-jar-with-dependencies.jar
+- EisProject-\<version>.jar
+- EisProject-\<version>-jar-with-dependencies.jar
 
 Il secondo file jar comprende anche tutte le dipendenze.
 
