@@ -102,6 +102,8 @@ non impedità il salvataggio di articoli in multipla copia.
 - Non si assicura che il programma gestisca correttamente richieste di articoli
 superiori a quelle disponibili da una data fonte. Il comportamento generale
 prevede il salvataggio di tutti gli articoli disponibili.
+- Il formato della stoplist deve essere lo stesso di quella fornita in 
+example assets. Lo stesso vale per gli articoli letti da CSV
 
 
 

@@ -1,7 +1,7 @@
 package it.unipd.dei.eis.source.Guardian;
 
 
-import com.apiguardian.bean.Article;
+import com.apitheguardian.bean.Article;
 import it.unipd.dei.eis.source.SimpleArticle;
 import it.unipd.dei.eis.source.SimpleArticleIterator;
 
@@ -37,8 +37,8 @@ public class GuardianSimpleIterator implements SimpleArticleIterator {
     public SimpleArticle next() {
         if (!hasNext())
             return null;
-        Article art = guardianWrapper.getArticle(current++);
-        return new SimpleArticle(art.getWebTitle(), art.getBodyText());
+        Article article = guardianWrapper.getArticle(current++);
+        return new SimpleArticle(article.getWebTitle(), article.getBodyText());
     }
 
 }
