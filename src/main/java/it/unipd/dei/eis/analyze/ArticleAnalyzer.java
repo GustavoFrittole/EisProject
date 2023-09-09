@@ -14,7 +14,7 @@ public class ArticleAnalyzer {
     /**
      * Imposta una lista di parole che non saranno contate nelle successive esecuzioni
      * dei metodi {@link #countOccurrences(Iterable) countOccurrences} e
-     * {@link #countOccurrencesPerFIle(Iterable) countOccurrencesPerFIle}
+     * {@link #countOccurrencesPerArticle(Iterable) countOccurrencesPerFIle}
      * @param stopList lista delle stop words
      */
     public static void setStopList(List<String> stopList) {
@@ -27,6 +27,7 @@ public class ArticleAnalyzer {
      * @param iterable struttura contenente gli articoli da analizzare
      * @return una lista di WeightedToken, ovvero coppie parola-peso
      */
+    @Deprecated
     public static List<WeightedToken> countOccurrences(Iterable<SimpleArticle> iterable) {
         String text = mergeArticles(iterable);
         String[] words = text.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
@@ -39,7 +40,7 @@ public class ArticleAnalyzer {
      * @param iterable struttura contenente gli articoli da analizzare
      * @return una lista di {@link WeightedToken WeightedToken}
      */
-    public static List<WeightedToken> countOccurrencesPerFIle(Iterable<SimpleArticle> iterable) {
+    public static List<WeightedToken> countOccurrencesPerArticle(Iterable<SimpleArticle> iterable) {
         List<Set<String>> wordsPerArticles = new LinkedList<>();
         for(SimpleArticle simpleArticle : iterable){
             String[] words = (simpleArticle.getTitle() + " " + simpleArticle.getBody())
@@ -88,7 +89,7 @@ public class ArticleAnalyzer {
     }
 
     /**
-     * Funzione accessoria di {@link #countOccurrencesPerFIle(Iterable) countOccurrencesPerFIle}
+     * Funzione accessoria di {@link #countOccurrencesPerArticle(Iterable) countOccurrencesPerFIle}
      * @param wordsInArticles
      * @return
      */

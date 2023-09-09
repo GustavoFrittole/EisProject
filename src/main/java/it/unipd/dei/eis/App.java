@@ -196,7 +196,7 @@ public class App {
                 return false;
             }
         }
-        List<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerFIle(articleList);
+        List<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerArticle(articleList);
         try {
             AssetsUtils.saveWeightedWords(weightedTokens,
                     properties.getProperty("results_file_name") + ".txt",
