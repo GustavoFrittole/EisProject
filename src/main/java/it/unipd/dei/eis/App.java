@@ -19,7 +19,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-//TODO: SISTEMARE IL CONTATORE DI PAROLE COME DA COMSEGNA (CONTARE SINGOLARMENTE PER OGNI ARTICOLO)
+/**
+ * Permette all'utente di interfacciarsi
+ * alle funzionalità dell'app tramite cli
+ */
+    //NOTA: in realtà permette anche l'interazione tra le varie parti/classi/moduli
+    //      il che si sarebbe potuto implementare a parte (es. pattern controller).
 public class App {
     private static Options options;
     private static CommandLine cmd;

@@ -1,5 +1,9 @@
 package it.unipd.dei.eis.source;
 
+/**
+ * Versione semplificata di un articolo che presenta solamente
+ * titolo e body (testo dell'articolo)
+ */
 public class SimpleArticle {
     private String title;
     private String body;

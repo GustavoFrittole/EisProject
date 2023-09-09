@@ -30,7 +30,7 @@ Il secondo file jar comprende anche tutte le dipendenze.
 
 ### Eseguire il progetto Maven
 
-E' possibile eseguire il programma dalla cartella principale tramite il comando:
+È possibile eseguire il programma dalla cartella principale tramite il comando:
 
 (sostituire a \<version> la versione utilizzata)
 
@@ -86,7 +86,8 @@ Come sopra specificando fonti multiple.
     #necessari per -et
         results_file_name=results
         words_to_print=50
-
+Se i campi necessari all'azione scelta non sono compilati, il corretto
+funzionamento del programma non è assicurato
 ### NOTE
 - I file presenti sotto la carella src/main/java/com/apiguardian/
 non sono proprietà dell'autore di questo file,

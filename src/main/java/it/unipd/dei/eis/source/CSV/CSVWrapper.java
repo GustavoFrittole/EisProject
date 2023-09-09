@@ -10,11 +10,20 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Iterator;
 
+/**
+ * Questa implementazione is fa carico della responsabilità
+ * dell'ottenimento degli articoli e li mantiene come {@link SimpleArticle SimpleArticle}
+ */
 public class CSVWrapper implements SourceWrapper {
     public final int articlesNumber;
     private final String csvFileUrl;
     private SimpleArticle[] articles;
 
+    /**
+     *
+     * @param csvFileUrl file da cui reperire gli articoli
+     * @param articlesNumber numero massimo di articoli da reperire dal file
+     */
     public CSVWrapper(String csvFileUrl, int articlesNumber) {
         this.csvFileUrl = csvFileUrl;
         this.articlesNumber = articlesNumber;
@@ -25,6 +34,12 @@ public class CSVWrapper implements SourceWrapper {
         return new CSVSimpleIterator(this);
     }
 
+    /**
+     * Legge {@link #articlesNumber articlesNumber} articoli dal dato {@link #csvFileUrl file}
+     * e li conserva in {@link #articles articles}.
+     * @throws RuntimeException in caso di problemi in apertura/lettura/chiusura file
+     */
+    //si sarebbe potuto cedere la responsabilità ad AssetsUtil e gestire meglio le eccezioni
     public void retriveArticles() {
         try (Reader reader = new FileReader(csvFileUrl)) {
             articles = new SimpleArticle[articlesNumber];
@@ -43,7 +58,15 @@ public class CSVWrapper implements SourceWrapper {
         }
     }
 
+    /**
+     * Accesso agli articoli ottenuti tramite indice
+     * @param index indice articolo
+     * @return l'articolo che si trova al dato indice o
+     * null se l'elemento non è popolato
+     */
     public SimpleArticle getSimpleArticle(int index) {
+        if (index < 0 || index >= articlesNumber)
+            return null;
         return articles[index];
     }
 
