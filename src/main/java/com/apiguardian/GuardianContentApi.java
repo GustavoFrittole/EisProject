@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//classe modificata: vedi commenti
 public class GuardianContentApi {
 
     private final static String TARGET_URL = "http://content.guardianapis.com/search";
@@ -48,9 +49,11 @@ public class GuardianContentApi {
     private String tag;
     private Date toDate;
     private Date fromDate;
+
+    //variabile aggiunta
     private String order;
 
-    //aggiunta variabile pagina
+    //variabile aggiunta
     private int pageSize;
 
     public GuardianContentApi(final String apiKey) {
@@ -77,39 +80,45 @@ public class GuardianContentApi {
         this.tag = tag;
     }
 
+    //metodo aggiunto
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
 
+    //metodo aggiunto
     public void setOrder(String order) {
         this.order = order;
     }
 
+    //metodo modificato
     public Response getContent(String query) {
         return getContent(query, 1);
     }
 
+    //metodo modificato
     public Response getContent() {
         return getContent(null, 10);
     }
 
+    //metodo modificato
     public Response getContent(String query, int page) {
 
         HttpRequest request = Unirest.get(TARGET_URL)
                 .queryString("api-key", apiKey)
                 .header("accept", "application/json");
 
+        //sezione aggiunta
         if (pageSize > 1 && pageSize < 201) {
             request.queryString("page-size", pageSize);
         }
+        //sezione aggiunta
         if (page > 0) {
             request.queryString("page", page);
         }
-
         if (query != null && !query.isEmpty()) {
             request.queryString("q", query);
         }
-
+        //sezione aggiunta
         if (order != null && !order.isEmpty()) {
             request.queryString("order-by", order);
         }

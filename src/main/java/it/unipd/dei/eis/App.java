@@ -14,11 +14,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-//TODO: SISTEMARE IL CONTATORE DI PAROLE COME DA COMSEGNA (CONTARE SINGOLARMENTE PER OGNI ARTICOLO)
+/**
+ * Permette all'utente di interfacciarsi
+ * alle funzionalità dell'app tramite cli
+ */
+    //NOTA: in realtà permette anche l'interazione tra le varie parti/classi/moduli
+    //      il che si sarebbe potuto implementare a parte (es. pattern controller).
 public class App {
     private static Options options;
     private static CommandLine cmd;
@@ -36,7 +42,6 @@ public class App {
         options.addOption(new Option("pf", "property-file",
                 true, "Load custom configuration from given file"));
 
-        OptionGroup optionGroup = new OptionGroup();
         options.addOption(Option.builder("ga")
                 .longOpt("guardian-api")
                 .hasArg(true)
@@ -49,7 +54,6 @@ public class App {
                 .optionalArg(true)
                 .desc("Set CSV FILE as source, file path as optional argument")
                 .build());
-        options.addOptionGroup(optionGroup);
     }
 
     private static void printHelp() {
@@ -120,8 +124,8 @@ public class App {
         return true;
     }
 
-    private static boolean retrieveAndSave() {
-        SourceWrapper sourceWrapper = null;
+    private static boolean retrieveAndSave(){
+        List<SourceWrapper> sourceWrappers = new ArrayList<>();
         if (cmd.hasOption("ga")) {
             //Unnecessary
             /*if (!cmd.hasOption("pf")) {
@@ -132,34 +136,40 @@ public class App {
             String query = cmd.getOptionValue("ga");
             if (query == null)
                 query = properties.getProperty("guardian_api_query");
-            sourceWrapper = new GuardianWrapper(properties.getProperty("guardian_api_key"),
+            sourceWrappers.add(new GuardianWrapper(properties.getProperty("guardian_api_key"),
                     query,
                     Integer.parseInt(properties.getProperty("guardian_api_articles_per_page")),
-                    Integer.parseInt(properties.getProperty("guardian_api_pages")));
+                    Integer.parseInt(properties.getProperty("guardian_api_pages"))));
         }
         if (cmd.hasOption("cf")) {
             String csvFileUrl = cmd.getOptionValue("cf");
             if (csvFileUrl == null)
                 csvFileUrl = properties.getProperty("csv_file_url");
-            sourceWrapper = new CSVWrapper(csvFileUrl,
-                    Integer.parseInt(properties.getProperty("csv_file_articles")));
+            sourceWrappers.add( new CSVWrapper(csvFileUrl,
+                    Integer.parseInt(properties.getProperty("csv_file_articles"))));
         }
-        if (sourceWrapper == null) {
-            System.err.println("ERROR - Must specify source");
+
+        //Other sources
+
+        if (sourceWrappers.isEmpty()) {
+            System.err.println("ERROR - Must specify sources");
             return false;
         }
         try {
-            sourceWrapper.retriveArticles();
+            for(SourceWrapper sourceWrapper : sourceWrappers){
+                sourceWrapper.retriveArticles();
+            }
         } catch (Exception e) {
             System.err.println("ERROR - Could not retrive articles from source: ");
             System.err.println(e.getMessage());
             return false;
         }
-        Iterator<SimpleArticle> iterator = sourceWrapper.iterator();
         try {
-            AssetsUtils.saveArticlesToFile(iterator);
+            for(SourceWrapper sourceWrapper : sourceWrappers){
+                AssetsUtils.saveArticlesToFile(sourceWrapper.iterator());
+            }
         } catch (IOException | IllegalArgumentException e) {
-            System.err.println("ERROR - Could not save article to file: ");
+            System.err.println("ERROR - Could not save articles to file: ");
             System.err.println(e.getMessage());
             return false;
         }
@@ -187,7 +197,7 @@ public class App {
                 return false;
             }
         }
-        List<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrences(articleList);
+        List<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerFIle(articleList);
         try {
             AssetsUtils.saveWeightedWords(weightedTokens,
                     properties.getProperty("results_file_name") + ".txt",
