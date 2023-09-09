@@ -12,7 +12,7 @@ compilando i campi a cui si è interessati (vedi sezione dedicata).
     EisProject/src/main/resources/application.properties.example
 
 Una volta fatto, rinominarlo in "application.properties". In alternativa è possibile
-importare un file di proprietà esterno a ogni esecuzione tramite l'opzione (-pf).
+importare un file di proprietà esterno (il formato deve essere lo stesso di application.properties.example) a ogni esecuzione tramite l'opzione (-pf).
 È necessario che almeno una delle due condizioni sia rispettata.
 
 Per creare il file jar relativo al progetto e comprensivo delle dipendenze,
@@ -37,18 +37,20 @@ Il secondo file jar comprende anche tutte le dipendenze.
     java -jar target/EisProject-<version>-jar-with-dependencies.jar <args>
 
 #### Esempi di utilizzo
-Con facoltativo e necesario ci si riferisce algli argomenti delle proprietà, non alle proprietà stesse.
-E necessaria la presenza di -sf oppure -et oppure entrambe.
+Gli argomenti fondamentali sono:
+- (-sf) (ottienere i documenti dalla/e fonte/i da specificare e salvarli localmente)
+- (-et) (leggere i documenti salvati, analizzare i termini contenuti e salvarle su file i risultati)
+almeno uno dei due deve essere presente
 
     java -jar target/EisProject-<version>-jar-with-dependencies.jar
-        -sf -cf [facoltativo-file] -pf [necessario-file_esterno_delle_proprietà]
-Recupera il numero impostato (file delle proprietà) di articoli dal dato file
-e li salva in un file locale. Se il file non è indicato nell'argomento
-allora viene letto dal file delle proprietà.
+        -sf -cf [facoltativo-file] -pf [file_esterno_delle_proprietà]
+Recupera il numero impostato (nel file delle proprietà) di articoli dal file specificato
+(tramite argomenro o nel file delle proprietà) e li salva in un file locale.
+Se il file non è indicato nell'argomento allora viene letto dal file delle proprietà.
 
     java -jar target/EisProject-<version>-jar-with-dependencies.jar
         -sf -ga [facoltativo-query] -et
-Recupera il numero impostato (file delle proprietà) di articoli tramite le API
+Recupera il numero impostato (nel file delle proprietà) di articoli tramite le API
 di The Guardian Open Platform e li salva in un file locale. 
 Se la query non è indicata nell'argomento allora viene letta dal file delle proprietà.
 Successivamente legge tale file, e stampa su di un altro file una lista dei termini
