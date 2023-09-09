@@ -1,8 +1,7 @@
 package it.unipd.dei.eis.source.Guardian;
-
-import com.apiguardian.GuardianContentApi;
-import com.apiguardian.bean.Article;
-import com.apiguardian.bean.Response;
+import com.apitheguardian.GuardianContentApi;
+import com.apitheguardian.bean.Article;
+import com.apitheguardian.bean.Response;
 import it.unipd.dei.eis.source.SimpleArticle;
 import it.unipd.dei.eis.source.SourceWrapper;
 
