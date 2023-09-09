@@ -18,6 +18,8 @@ public class ArticleAnalyzer {
      * @param stopList lista delle stop words
      */
     public static void setStopList(List<String> stopList) {
+        if(stopList == null)
+            throw new IllegalArgumentException("Argomento nullo");
         ArticleAnalyzer.stopList = stopList;
     }
 
@@ -36,11 +38,16 @@ public class ArticleAnalyzer {
 
     /**
      * Estrae le parole utilizzate nei dati articoli e associa a esse un peso.
+     * Tutti i caratteri diversi da lettere sono ignorati.
+     * Non è cap sensitive.
      * Il peso corrisponde al numero di documenti in cui appaiono.
      * @param iterable struttura contenente gli articoli da analizzare
      * @return una lista di {@link WeightedToken WeightedToken}
+     * @throws IllegalArgumentException se l'argomento è nullo
      */
     public static List<WeightedToken> countOccurrencesPerArticle(Iterable<SimpleArticle> iterable) {
+        if(iterable == null)
+            throw new IllegalArgumentException("Argomento nullo");
         List<Set<String>> wordsPerArticles = new LinkedList<>();
         for(SimpleArticle simpleArticle : iterable){
             String[] words = (simpleArticle.getTitle() + " " + simpleArticle.getBody())

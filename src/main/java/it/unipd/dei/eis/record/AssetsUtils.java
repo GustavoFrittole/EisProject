@@ -76,6 +76,8 @@ public class AssetsUtils {
      * @throws FileNotFoundException se il file indicato viene trovato
      */
     public static List<String> loadStopList(String stopListFilePath) throws FileNotFoundException {
+        if(stopListFilePath == null)
+            throw new IllegalArgumentException("Argomento nullo");
         List<String> stopWords;
         try (Scanner scan = new Scanner(new File(stopListFilePath))) {
             stopWords = new LinkedList<>();

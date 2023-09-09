@@ -107,6 +107,13 @@ superiori a quelle disponibili da una data fonte. Il comportamento generale
 prevede il salvataggio di tutti gli articoli disponibili.
 - Il formato della stoplist deve essere lo stesso di quella fornita in 
 example assets. Lo stesso vale per gli articoli letti da CSV
+- Limitazioni dell'analisi degli articoli: nel raro caso fossero presenti 
+parole rilevanti contenenti caratteri diversi da lettere, esse non saranno 
+lette correttamente dal'algoritmo di conteggio (es. il modello di reattore
+nucleare "VVER-440/V-230" sarà salvato come "vverv"). Questo perché tutti i
+caratteri diversi da [^a-zA-Z ] (le lettere maiuscole e minuscole dalla
+"a" alla "z") vengono ignorati. Analizzare articoli da lingue diverse
+necessiterebbe una diversa selezione di caratteri. 
 
 
 

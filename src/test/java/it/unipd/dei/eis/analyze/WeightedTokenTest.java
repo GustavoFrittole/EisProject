@@ -21,12 +21,12 @@ class WeightedTokenTest {
     @ParameterizedTest
     @MethodSource("weightedBiggerTokensList")
     void compareToBiggerTest(WeightedToken otherWT) {
-        Assertions.assertTrue(weightedToken.compareTo(otherWT) < 0);
+        assertTrue(weightedToken.compareTo(otherWT) < 0);
     }
     @ParameterizedTest
     @MethodSource("weightedSmallerTokensList")
     void compareToSmallerTest(WeightedToken otherWT) {
-        Assertions.assertFalse(weightedToken.compareTo(otherWT) < 0);
+        assertFalse(weightedToken.compareTo(otherWT) < 0);
     }
 
     @ParameterizedTest
@@ -36,8 +36,22 @@ class WeightedTokenTest {
     }
 
     @Test
-    void equalsTest() {
+    void equalsTestValidArgument() {
         assertEquals(weightedToken, new WeightedToken("word", 2));
+    }
+
+    @Test
+    void equalsTestInvalidArgument() {
+        assertThrows(NullPointerException.class, () -> {
+            weightedToken.equals(null);
+        });
+    }
+
+    @Test
+    void compareToTestInvalidArgument() {
+        assertThrows(NullPointerException.class, () -> {
+            weightedToken.compareTo(null);
+        });
     }
 
     private static List<WeightedToken> weightedBiggerTokensList (){
