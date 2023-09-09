@@ -38,7 +38,7 @@ Il secondo file jar comprende anche tutte le dipendenze.
 
 #### Esempi di utilizzo
 Gli argomenti fondamentali sono:
-- (-sf) (ottienere i documenti dalla/e fonte/i da specificare e salvarli localmente)
+- (-sf) (ottenere i documenti dalla/e fonte/i da specificare e salvarli localmente)
 - (-et) (leggere i documenti salvati, analizzare i termini contenuti e salvarle su file i risultati)
 
 Almeno uno dei due deve essere presente.
