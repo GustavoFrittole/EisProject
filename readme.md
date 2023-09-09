@@ -91,10 +91,6 @@ Come sopra specificando fonti multiple.
 Se i campi necessari all'azione scelta non sono compilati, il corretto
 funzionamento del programma non è assicurato
 ### NOTE
-- I file presenti sotto la carella src/main/java/com/apiguardian/
-non sono proprietà dell'autore di questo file,
-che ha solo apportato delle modifiche a essi (indicate nei commenti).
-Vedi: https://github.com/matarrese/content-api-the-guardian.git
 - Gli articoli vengono salvati su di un file, saved_articles.csv, che si trova nella cartella principale 
 della repository, la scrittura è impostata su append. Se si vuole eliminare
 gli articoli salvati in precedenza sarà necessario eliminare tale file. Il programma
