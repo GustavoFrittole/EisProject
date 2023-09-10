@@ -18,43 +18,47 @@ class GuardianSimpleIteratorTest {
         Article mockArt = mock(Article.class);
         when(mockArt.getBodyText()).thenReturn("testB");
         when(mockArt.getWebTitle()).thenReturn("testT");
-        when(mockGuardianWrapper.getSimpleArticle(0, 0)).thenReturn(mockArt);
+        when(mockGuardianWrapper.getArticle(0)).thenReturn(mockArt);
+        when(mockGuardianWrapper.getArticlesPerPage()).thenReturn(1);
+        when(mockGuardianWrapper.getTotPages()).thenReturn(1);
+        Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockGuardianWrapper);
+        assertTrue(GuardianSimpleArticleIterator.hasNext());
+    }
+    @Test
+    void hasNextNullTest() {
+
+        GuardianWrapper mockGuardianWrapper = mock(GuardianWrapper.class);
+        when(mockGuardianWrapper.getArticle(0)).thenReturn(null);
         when(mockGuardianWrapper.getArticlesPerPage()).thenReturn(1);
         when(mockGuardianWrapper.getTotPages()).thenReturn(1);
         Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockGuardianWrapper);
         assertFalse(GuardianSimpleArticleIterator.hasNext());
     }
- /*   @Test
-    void hasNextNullTest() {
-        GuardianWrapper mockGuardianWrapper = mock(GuardianWrapper.class);
-        when(mockGuardianWrapper.getSimpleArticle(0)).thenReturn(null);
-        when(mockGuardianWrapper.getArticlesNumber()).thenReturn(1);
-        Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockGuardianWrapper);
-        assertFalse(GuardianSimpleArticleIterator.hasNext());
-    }
+
     @Test
     void hasNextOutOfRangeTest() {
-        GuardianWrapper mockeGuardianWrapper = mock(GuardianWrapper.class);
-        when(mockeGuardianWrapper.getSimpleArticle(0)).thenReturn(new SimpleArticle("test", "test"));
-        when(mockeGuardianWrapper.getArticlesNumber()).thenReturn(0);
-        Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockeGuardianWrapper);
+        GuardianWrapper mockGuardianWrapper = mock(GuardianWrapper.class);
+        Article mockArt = mock(Article.class);
+        when(mockArt.getBodyText()).thenReturn("testB");
+        when(mockArt.getWebTitle()).thenReturn("testT");
+        when(mockGuardianWrapper.getArticle(0)).thenReturn(mockArt);
+        when(mockGuardianWrapper.getArticlesPerPage()).thenReturn(1);
+        when(mockGuardianWrapper.getTotPages()).thenReturn(0);
+        Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockGuardianWrapper);
         assertFalse(GuardianSimpleArticleIterator.hasNext());
     }
 
     @Test
     void shouldReturnNextTest() {
-        GuardianWrapper mockeGuardianWrapper = mock(GuardianWrapper.class);
-        when(mockeGuardianWrapper.getSimpleArticle(0)).thenReturn(new SimpleArticle("testT", "testB"));
-        when(mockeGuardianWrapper.getArticlesNumber()).thenReturn(1);
-        Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockeGuardianWrapper);
+        GuardianWrapper mockGuardianWrapper = mock(GuardianWrapper.class);
+        Article mockArt = mock(Article.class);
+        when(mockArt.getBodyText()).thenReturn("testB");
+        when(mockArt.getWebTitle()).thenReturn("testT");
+        when(mockGuardianWrapper.getArticle(0)).thenReturn(mockArt);
+        when(mockGuardianWrapper.getArticlesPerPage()).thenReturn(1);
+        when(mockGuardianWrapper.getTotPages()).thenReturn(1);
+        Iterator<SimpleArticle> GuardianSimpleArticleIterator = new GuardianSimpleIterator(mockGuardianWrapper);
         SimpleArticle result = GuardianSimpleArticleIterator.next();
         assertTrue(result.getTitle().equals("testT") && result.getBody().equals("testB"));
     }
-    @Test
-    void hasNext() {
-    }
-
-    @Test
-    void next() {
-    }*/
 }

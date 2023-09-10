@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 /**
  * Questa implementazione is fa carico della responsabilità
- * dell'ottenimento degli articoli e li mantiene come {@link SimpleArticle SimpleArticle}
+ * dell'ottenimento degli articoli e li mantiene come {@link Article Article}
  */
 public class GuardianWrapper implements SourceWrapper {
 
@@ -68,7 +68,7 @@ public class GuardianWrapper implements SourceWrapper {
      * @return l'articolo che si trova al dato indice o
      * null se l'elemento non è popolato
      */
-    public Article getSimpleArticle(int page, int index) {
+    public Article getArticle(int page, int index) {
         return articles[page * articlesPerPage + index];
     }
 

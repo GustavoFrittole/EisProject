@@ -83,7 +83,7 @@ class ArticleAnalyzerTest {
         }).iterator();
         //se ottengo più o meno parole del dovuto, un .next() invaliderà il test
         while(weightedTokens.hasNext() || expected.hasNext())
-            System.out.println(weightedTokens.next().toString() + expected.next());
+            assertEquals(weightedTokens.next(), expected.next());
     }
 
     //Essendo la stop list variabile statica, l'ordine conta
