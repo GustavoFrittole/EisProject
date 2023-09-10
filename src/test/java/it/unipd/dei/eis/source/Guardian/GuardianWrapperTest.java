@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GuardianWrapperTest {
-    private static String yorApiKey = "053e5c1e-0f7f-44d6-a87e-dedd9f02efd2";
+    //Difficile da rendere autonoma dall' API client senza modifiche
+    //  strutturali non desiderabili
+    private static String yorApiKey = "";
     @Test
     void retriveArticlesExampleTest() {
         int artPerPage = 3, totPages = 3;

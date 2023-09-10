@@ -147,7 +147,7 @@ class AssetsUtilsTest {
                 "about",
                 "above",
                 "after",
-                "again"
+                "another"
         }).iterator();
         while(stopWords.hasNext() || expected.hasNext()){
             assertEquals(stopWords.next(), expected.next());
