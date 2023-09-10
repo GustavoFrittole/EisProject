@@ -16,7 +16,7 @@ public class GuardianSimpleIterator implements SimpleArticleIterator {
      */
     GuardianSimpleIterator(GuardianWrapper guardianWrapper) {
         if (guardianWrapper == null)
-            throw new IllegalArgumentException("Argomento nullo");
+            throw new IllegalArgumentException("Null argument");
         this.guardianWrapper = guardianWrapper;
     }
 

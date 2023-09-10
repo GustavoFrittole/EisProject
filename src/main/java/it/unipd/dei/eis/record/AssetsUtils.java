@@ -24,9 +24,9 @@ public class AssetsUtils {
      * @throws IllegalArgumentException se l'argomento è nullo
      * @throws IOException in caso di problemi in apertura/scrittura/chiusura file
      */
-    public static void saveArticlesToFile(Iterator<SimpleArticle> iterator) throws IllegalArgumentException, IOException {
+    public static void saveArticlesToFile(Iterator<SimpleArticle> iterator) throws IOException {
         if (iterator == null) {
-            throw new IllegalArgumentException("Argomento nullo");
+            throw new IllegalArgumentException("Null argument");
         }
 
         CSVFormat csvFileFormat = CSVFormat.Predefined.Default.getFormat();
@@ -73,11 +73,11 @@ public class AssetsUtils {
      * Carica una stoplist da file locale
      * @param stopListFilePath l'URL assoluto della stoplist
      * @return lista di stop words
-     * @throws FileNotFoundException se il file indicato viene trovato
+     * @throws FileNotFoundException se il file indicato non viene trovato
      */
     public static List<String> loadStopList(String stopListFilePath) throws FileNotFoundException {
         if(stopListFilePath == null)
-            throw new IllegalArgumentException("Argomento nullo");
+            throw new IllegalArgumentException("Null argument");
         List<String> stopWords;
         try (Scanner scan = new Scanner(new File(stopListFilePath))) {
             stopWords = new LinkedList<>();
@@ -95,7 +95,10 @@ public class AssetsUtils {
      * @param wordsToPrint numero massimo coppie parola peso da salvare su file
      * @throws IOException in caso di problemi in apertura/scrittura/chiusura file
      */
+
     public static void saveWeightedWords(List<WeightedToken> weightedTokens, String fileName, int wordsToPrint) throws IOException {
+        if(weightedTokens == null || fileName == null)
+            throw new IllegalArgumentException("Null argument / arguments");
         Iterator<WeightedToken> weightedTokenIterator = weightedTokens.iterator();
         try (
                 FileWriter fileWriter = new FileWriter(fileName);

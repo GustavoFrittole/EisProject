@@ -19,7 +19,7 @@ public class ArticleAnalyzer {
      */
     public static void setStopList(List<String> stopList) {
         if(stopList == null)
-            throw new IllegalArgumentException("Argomento nullo");
+            throw new IllegalArgumentException("Null argument");
         ArticleAnalyzer.stopList = stopList;
     }
 
@@ -47,7 +47,7 @@ public class ArticleAnalyzer {
      */
     public static List<WeightedToken> countOccurrencesPerArticle(Iterable<SimpleArticle> iterable) {
         if(iterable == null)
-            throw new IllegalArgumentException("Argomento nullo");
+            throw new IllegalArgumentException("Null argument");
         List<Set<String>> wordsPerArticles = new LinkedList<>();
         for(SimpleArticle simpleArticle : iterable){
             String[] words = (simpleArticle.getTitle() + " " + simpleArticle.getBody())
