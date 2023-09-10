@@ -105,6 +105,10 @@ class AssetsUtilsTest {
             assertEquals(scan.nextLine(), "This is a title,This is a body");
             assertEquals(scan.nextLine(), "\"This is, \"\"another\"\", title\",This is another a body");
             assertEquals(scan.nextLine(), "Third,Article");
+            if(scan.hasNextLine()) {
+                assertEquals(scan.nextLine(), "");
+                assertFalse(scan.hasNextLine());
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -126,6 +130,7 @@ class AssetsUtilsTest {
                 simpleArticles.get(1).getTitle() + simpleArticles.get(1).getBody());
         assertEquals("This is, \"another\", titleThis is another a body",
                 simpleArticles.get(2).getTitle() + simpleArticles.get(2).getBody());
+        assertEquals(simpleArticles.size(), 3);
     }
 
     @Test

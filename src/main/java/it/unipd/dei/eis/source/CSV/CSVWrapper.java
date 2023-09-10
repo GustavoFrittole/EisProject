@@ -14,8 +14,10 @@ import java.util.Iterator;
  * Questa implementazione is fa carico della responsabilità
  * dell'ottenimento degli articoli e li mantiene come {@link SimpleArticle SimpleArticle}
  */
+//NOTA: a posteriori sarebbe stato più sensato contenere una variabile che indicasse il numero di articoli
 public class CSVWrapper implements SourceWrapper {
-    public final int articlesNumber;
+
+    private int articlesNumber;
     private final String csvFileUrl;
     private SimpleArticle[] articles;
 
@@ -48,11 +50,12 @@ public class CSVWrapper implements SourceWrapper {
                     .withFirstRecordAsHeader()
                     .parse(reader);
             Iterator<CSVRecord> recordsIterator = records.iterator();
-
-            for (int i = 0; i < articlesNumber && recordsIterator.hasNext(); i++) {
+            int i;
+            for (i = 0; i < articlesNumber && recordsIterator.hasNext(); i++) {
                 CSVRecord record = recordsIterator.next();
                 articles[i] = new SimpleArticle(record.get(2), record.get(3));
             }
+            articlesNumber = i;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,5 +72,7 @@ public class CSVWrapper implements SourceWrapper {
             return null;
         return articles[index];
     }
-
+    public int getArticlesNumber() {
+        return articlesNumber;
+    }
 }

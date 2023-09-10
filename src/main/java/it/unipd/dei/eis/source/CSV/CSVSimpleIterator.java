@@ -21,7 +21,7 @@ public class CSVSimpleIterator implements SimpleArticleIterator {
     public boolean hasNext() {
         //essendo gli articoli mantenuti nei wrapper come array e non liste è
         //possibile che i campi non siano stati tutti popolati -> ci si ferma al primo valore nullo
-        return current != csvWrapper.articlesNumber && csvWrapper.getSimpleArticle(current) != null;
+        return current != csvWrapper.getArticlesNumber() && csvWrapper.getSimpleArticle(current) != null;
     }
 
     /**

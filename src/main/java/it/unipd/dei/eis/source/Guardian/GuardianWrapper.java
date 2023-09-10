@@ -12,11 +12,12 @@ import java.util.Iterator;
  * dell'ottenimento degli articoli e li mantiene come {@link SimpleArticle SimpleArticle}
  */
 public class GuardianWrapper implements SourceWrapper {
-    public final int articlesPerPage;
+
+    private final int articlesPerPage;
     private final String query;
     private final String apiKey;
     private final Article[] articles;
-    public int totPages;
+    private int totPages;
     private String order;
 
     /**
@@ -41,6 +42,7 @@ public class GuardianWrapper implements SourceWrapper {
     public void retriveArticles() {
         GuardianContentApi api = new GuardianContentApi(apiKey);
         api.setPageSize(articlesPerPage);
+        int temp = 0;
         if (order != null)
             api.setOrder(order);
         for (int i = 0; i < totPages; i++) {
@@ -66,7 +68,7 @@ public class GuardianWrapper implements SourceWrapper {
      * @return l'articolo che si trova al dato indice o
      * null se l'elemento non è popolato
      */
-    public Article getArticle(int page, int index) {
+    public Article getSimpleArticle(int page, int index) {
         return articles[page * articlesPerPage + index];
     }
 
@@ -90,6 +92,14 @@ public class GuardianWrapper implements SourceWrapper {
      */
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public int getArticlesPerPage() {
+        return articlesPerPage;
+    }
+
+    public int getTotPages() {
+        return totPages;
     }
 }
 

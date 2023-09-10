@@ -82,34 +82,22 @@
   </repositories>
   <dependencies>
     <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>5.3.0</version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.5.0</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>groovy</artifactId>
-          <groupId>org.apache.groovy</groupId>
+          <artifactId>byte-buddy</artifactId>
+          <groupId>net.bytebuddy</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>groovy-xml</artifactId>
-          <groupId>org.apache.groovy</groupId>
+          <artifactId>byte-buddy-agent</artifactId>
+          <groupId>net.bytebuddy</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>hamcrest</artifactId>
-          <groupId>org.hamcrest</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>tagsoup</artifactId>
-          <groupId>org.ccil.cowan.tagsoup</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>json-path</artifactId>
-          <groupId>io.rest-assured</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>xml-path</artifactId>
-          <groupId>io.rest-assured</groupId>
+          <artifactId>objenesis</artifactId>
+          <groupId>org.objenesis</groupId>
         </exclusion>
       </exclusions>
     </dependency>
