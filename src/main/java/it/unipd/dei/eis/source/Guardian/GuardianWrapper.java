@@ -9,14 +9,15 @@ import java.util.Iterator;
 
 /**
  * Questa implementazione is fa carico della responsabilità
- * dell'ottenimento degli articoli e li mantiene come {@link SimpleArticle SimpleArticle}
+ * dell'ottenimento degli articoli e li mantiene come {@link Article Article}
  */
 public class GuardianWrapper implements SourceWrapper {
-    public final int articlesPerPage;
+
+    private final int articlesPerPage;
     private final String query;
     private final String apiKey;
     private final Article[] articles;
-    public int totPages;
+    private int totPages;
     private String order;
 
     /**
@@ -29,6 +30,10 @@ public class GuardianWrapper implements SourceWrapper {
     public GuardianWrapper(String apiKey, String query, int artPerPage, int totPages) {
         this.articlesPerPage = artPerPage;
         this.totPages = totPages;
+        if(query == null)
+            throw new IllegalArgumentException("Null query String");
+        if(apiKey == null)
+            throw new IllegalArgumentException("Null api key String");
         this.query = query;
         this.apiKey = apiKey;
         articles = new Article[totPages * articlesPerPage];
@@ -36,16 +41,20 @@ public class GuardianWrapper implements SourceWrapper {
 
     /**
      * Scarica articoli tramite le Guardian API secondo i valori impostati nelle variabili membro
-     * e li conserva in {@link #articles articles}.
+     * e li conserva in {@link #articles articles}. Ridimensiona totPages se
+     * non vi sono abbastanza articoli da richiedere
      */
     public void retriveArticles() {
         GuardianContentApi api = new GuardianContentApi(apiKey);
         api.setPageSize(articlesPerPage);
+        int temp = 0;
         if (order != null)
             api.setOrder(order);
         for (int i = 0; i < totPages; i++) {
             Response response = api.getContent(query, i + 1);
-            if (i == 0 && totPages > response.getPages()) totPages = response.getPages();
+            //condizione che impedisca di fare più richieste del possibile
+            if (i == 0 && totPages > response.getPages())
+                totPages = response.getPages();
             System.arraycopy(response.getResults(), 0, articles, articlesPerPage * i, response.getResults().length);
         }
     }
@@ -74,7 +83,7 @@ public class GuardianWrapper implements SourceWrapper {
      * Accesso agli articoli ottenuti tramite indice.
      * @param index indice articolo
      * @return l'articolo che si trova al dato indice o
-     * null se l'elemento non è popolato
+     * null se l'elemento non è popolato o è fuori range
      */
     public Article getArticle(int index) {
         if(index < 0 || index >= articlesPerPage*totPages)
@@ -90,6 +99,14 @@ public class GuardianWrapper implements SourceWrapper {
      */
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public int getArticlesPerPage() {
+        return articlesPerPage;
+    }
+
+    public int getTotPages() {
+        return totPages;
     }
 }
 

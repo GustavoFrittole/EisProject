@@ -5,6 +5,7 @@ import it.unipd.dei.eis.source.SourceWrapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -15,7 +16,8 @@ import java.util.Iterator;
  * dell'ottenimento degli articoli e li mantiene come {@link SimpleArticle SimpleArticle}
  */
 public class CSVWrapper implements SourceWrapper {
-    public final int articlesNumber;
+
+    private int articlesNumber;
     private final String csvFileUrl;
     private SimpleArticle[] articles;
 
@@ -25,6 +27,8 @@ public class CSVWrapper implements SourceWrapper {
      * @param articlesNumber numero massimo di articoli da reperire dal file
      */
     public CSVWrapper(String csvFileUrl, int articlesNumber) {
+        if(csvFileUrl == null)
+            throw new IllegalArgumentException("Null argument");
         this.csvFileUrl = csvFileUrl;
         this.articlesNumber = articlesNumber;
     }
@@ -48,11 +52,12 @@ public class CSVWrapper implements SourceWrapper {
                     .withFirstRecordAsHeader()
                     .parse(reader);
             Iterator<CSVRecord> recordsIterator = records.iterator();
-
-            for (int i = 0; i < articlesNumber && recordsIterator.hasNext(); i++) {
+            int i;
+            for (i = 0; i < articlesNumber && recordsIterator.hasNext(); i++) {
                 CSVRecord record = recordsIterator.next();
                 articles[i] = new SimpleArticle(record.get(2), record.get(3));
             }
+            articlesNumber = i;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -62,12 +67,14 @@ public class CSVWrapper implements SourceWrapper {
      * Accesso agli articoli ottenuti tramite indice
      * @param index indice articolo
      * @return l'articolo che si trova al dato indice o
-     * null se l'elemento non è popolato
+     * null se l'elemento non è popolato è o fuori range
      */
     public SimpleArticle getSimpleArticle(int index) {
         if (index < 0 || index >= articlesNumber)
             return null;
         return articles[index];
     }
-
+    public int getArticlesNumber() {
+        return articlesNumber;
+    }
 }

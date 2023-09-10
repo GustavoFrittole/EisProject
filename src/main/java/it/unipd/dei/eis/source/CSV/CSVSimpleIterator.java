@@ -13,7 +13,7 @@ public class CSVSimpleIterator implements SimpleArticleIterator {
      */
     public CSVSimpleIterator(CSVWrapper csvWrapper) {
         if (csvWrapper == null)
-            throw new IllegalArgumentException("Argomento nullo");
+            throw new IllegalArgumentException("Null argument");
         this.csvWrapper = csvWrapper;
     }
 
@@ -21,7 +21,7 @@ public class CSVSimpleIterator implements SimpleArticleIterator {
     public boolean hasNext() {
         //essendo gli articoli mantenuti nei wrapper come array e non liste è
         //possibile che i campi non siano stati tutti popolati -> ci si ferma al primo valore nullo
-        return current != csvWrapper.articlesNumber && csvWrapper.getSimpleArticle(current) != null;
+        return current != csvWrapper.getArticlesNumber() && csvWrapper.getSimpleArticle(current) != null;
     }
 
     /**

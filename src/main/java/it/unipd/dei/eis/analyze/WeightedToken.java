@@ -60,6 +60,8 @@ public class WeightedToken implements Comparable<WeightedToken> {
      */
     @Override
     public boolean equals(Object otherObject) {
+        if (otherObject == null)
+            throw new NullPointerException();
         if (otherObject == this)
             return true;
         if (!(otherObject instanceof WeightedToken))
