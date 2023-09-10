@@ -22,11 +22,22 @@ class CSVWrapperTest {
         assertTrue(csvWrapper.getSimpleArticle(1).getBody().equals("Body2"));
         assertTrue(csvWrapper.getSimpleArticle(2).getTitle().equals("Title3"));
         assertTrue(csvWrapper.getSimpleArticle(2).getBody().equals("Body3"));
-        assertTrue(csvWrapper.getSimpleArticle(4) == null);
-        assertTrue(csvWrapper.getSimpleArticle(-1) == null);
     }
     @Test
-    void retriveArticlesSmallerNumberTest() {
+    public void getSimpleArticleOutOfBoundsTests() {
+        CSVWrapper csvWrapper = new CSVWrapper("src/test/resources/testCsv.csv", 3);
+        csvWrapper.retriveArticles();
+
+        // Verifica che sia possibile ottenere gli articoli per indice
+        for (int i = 0; i < 3; i++) {
+            assertNotNull(csvWrapper.getSimpleArticle(i));
+        }
+        // Verifica che ottenere un articolo con un indice fuori dai limiti restituisca null
+        assertNull(csvWrapper.getSimpleArticle(-1));
+        assertNull(csvWrapper.getSimpleArticle(csvWrapper.getArticlesNumber()));
+    }
+    @Test
+    void retriveArticlesSmallRequestTest() {
         CSVWrapper csvWrapper = new CSVWrapper("src/test/resources/testCsv.csv", 1);
         csvWrapper.retriveArticles();
         assertTrue(csvWrapper.getSimpleArticle(1) == null &&
@@ -34,7 +45,7 @@ class CSVWrapperTest {
                 csvWrapper.getSimpleArticle(0).getTitle().equals("Title1")
         );
     }
-    void retriveArticlesBiggerNumberTest() {
+    void retriveArticlesBigRequestTest() {
         CSVWrapper csvWrapper = new CSVWrapper("src/test/resources/testCsv.csv", 6);
         csvWrapper.retriveArticles();
         assertTrue(csvWrapper.getArticlesNumber() == 3);
