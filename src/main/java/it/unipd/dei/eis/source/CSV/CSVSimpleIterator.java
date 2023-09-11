@@ -6,8 +6,8 @@ import it.unipd.dei.eis.source.SimpleArticleIterator;
 public class CSVSimpleIterator implements SimpleArticleIterator {
     private final CSVWrapper csvWrapper;
     private int current;
+
     /**
-     *
      * @param csvWrapper iterazione
      * @throws IllegalArgumentException se l'argomento è nullo
      */
@@ -25,7 +25,6 @@ public class CSVSimpleIterator implements SimpleArticleIterator {
     }
 
     /**
-     *
      * @return il prossimo elemento dell'iterazione
      * o null se {@link #hasNext() hasNext()} ritorna false
      */

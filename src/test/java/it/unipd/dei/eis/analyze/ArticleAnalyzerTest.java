@@ -1,11 +1,15 @@
 package it.unipd.dei.eis.analyze;
 
 import it.unipd.dei.eis.source.SimpleArticle;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +18,7 @@ class ArticleAnalyzerTest {
 
     @Test
     @Order(1)
-    void countOccurrencesPerArticleTestIllegalArgument() {
+    void countOccurrencesPerArticleIllegalArgumentTest() {
         assertThrows(IllegalArgumentException.class, () -> {
             ArticleAnalyzer.countOccurrencesPerArticle(null);
         });
@@ -22,7 +26,7 @@ class ArticleAnalyzerTest {
 
     @Test
     @Order(2)
-    void setStopListTestIllegalArgument() {
+    void setStopListIllegalArgumentTest() {
         assertThrows(IllegalArgumentException.class, () -> {
             ArticleAnalyzer.setStopList(null);
         });
@@ -30,7 +34,7 @@ class ArticleAnalyzerTest {
 
     @Test
     @Order(3)
-    void countOccurrencesPerArticleTestEmptyIterable() {
+    void countOccurrencesPerArticleEmptyIterableTest() {
         List<SimpleArticle> simpleArticles = new LinkedList<>();
         List<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerArticle(simpleArticles);
         assertTrue(weightedTokens.isEmpty());
@@ -38,20 +42,21 @@ class ArticleAnalyzerTest {
 
     @Test
     @Order(4)
-    void countOccurrencesPerArticleTestEmptyArticles() {
+    void countOccurrencesPerArticleEmptyArticlesTest() {
         List<SimpleArticle> simpleArticles = new LinkedList<>();
-        simpleArticles.add(new SimpleArticle("",""));
-        simpleArticles.add(new SimpleArticle("",""));
+        simpleArticles.add(new SimpleArticle("", ""));
+        simpleArticles.add(new SimpleArticle("", ""));
         List<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerArticle(simpleArticles);
         assertTrue(weightedTokens.isEmpty());
     }
+
     @Test
     @Order(5)
-    void countOccurrencesPerArticleTestExamples() {
+    void countOccurrencesPerArticleExamplesTest() {
         List<SimpleArticle> simpleArticles = new LinkedList<>();
-        simpleArticles.add(new SimpleArticle("uno due","due tre quattro"));
-        simpleArticles.add(new SimpleArticle("due","TRE TRE duE QUATTRO"));
-        simpleArticles.add(new SimpleArticle("DUE","CINqUE"));
+        simpleArticles.add(new SimpleArticle("uno due", "due tre quattro"));
+        simpleArticles.add(new SimpleArticle("due", "TRE TRE duE QUATTRO"));
+        simpleArticles.add(new SimpleArticle("DUE", "CINqUE"));
 
         Iterator<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerArticle(simpleArticles).iterator();
         Iterator<WeightedToken> expected = Arrays.asList(new WeightedToken[]{
@@ -62,16 +67,17 @@ class ArticleAnalyzerTest {
                 new WeightedToken("cinque", 1),
         }).iterator();
         //se ottengo più o meno parole del dovuto, un .next() invaliderà il test
-        while(weightedTokens.hasNext() && expected.hasNext())
+        while (weightedTokens.hasNext() && expected.hasNext())
             assertEquals(weightedTokens.next(), expected.next());
     }
+
     @Test
     @Order(6)
-    void countOccurrencesPerArticleTestExamplesWithSymbols() {
+    void countOccurrencesPerArticleExamplesWithSymbolsTest() {
         List<SimpleArticle> simpleArticles = new LinkedList<>();
-        simpleArticles.add(new SimpleArticle("uno£(% \"due\"63798","due44, 3tre3, quattro%%%"));
-        simpleArticles.add(new SimpleArticle("*due---","TRE ùùùùççç TRE .QUATTRO dUe"));
-        simpleArticles.add(new SimpleArticle("...DU--E,","CINq0000UE"));
+        simpleArticles.add(new SimpleArticle("uno£(% \"due\"63798", "due44, 3tre3, quattro%%%"));
+        simpleArticles.add(new SimpleArticle("*due---", "TRE ùùùùççç TRE .QUATTRO dUe"));
+        simpleArticles.add(new SimpleArticle("...DU--E,", "CINq0000UE"));
 
         Iterator<WeightedToken> weightedTokens = ArticleAnalyzer.countOccurrencesPerArticle(simpleArticles).iterator();
         Iterator<WeightedToken> expected = Arrays.asList(new WeightedToken[]{
@@ -82,18 +88,17 @@ class ArticleAnalyzerTest {
                 new WeightedToken("cinque", 1),
         }).iterator();
         //se ottengo più o meno parole del dovuto, un .next() invaliderà il test
-        while(weightedTokens.hasNext() || expected.hasNext())
+        while (weightedTokens.hasNext() || expected.hasNext())
             assertEquals(weightedTokens.next(), expected.next());
     }
 
-    //Essendo la stop list variabile statica, l'ordine conta
     @Test
     @Order(7)
-    void countOccurrencesPerArticleTestExamplesWithStopList() {
+    void countOccurrencesPerArticleExamplesWithStopListTest() {
         List<SimpleArticle> simpleArticles = new LinkedList<>();
-        simpleArticles.add(new SimpleArticle("uno due","due tre quattro"));
-        simpleArticles.add(new SimpleArticle("due","TRE TRE duE QUATTRO"));
-        simpleArticles.add(new SimpleArticle("DUE","CINqUE"));
+        simpleArticles.add(new SimpleArticle("uno due", "due tre quattro"));
+        simpleArticles.add(new SimpleArticle("due", "TRE TRE duE QUATTRO"));
+        simpleArticles.add(new SimpleArticle("DUE", "CINqUE"));
 
         ArticleAnalyzer.setStopList(Arrays.asList(new String[]{"uno", "tre"}));
 
@@ -104,7 +109,7 @@ class ArticleAnalyzerTest {
                 new WeightedToken("cinque", 1),
         }).iterator();
         //se ottengo più o meno parole del dovuto, un .next() invaliderà il test
-        while(weightedTokens.hasNext() || expected.hasNext())
+        while (weightedTokens.hasNext() || expected.hasNext())
             assertEquals(weightedTokens.next(), expected.next());
     }
 }

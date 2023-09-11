@@ -20,9 +20,10 @@ public class AssetsUtils {
 
     /**
      * Salva i dati articoli sul file specificato in {@link #filePath filePath}
+     *
      * @param iterator da cui leggere i file da salvare
      * @throws IllegalArgumentException se l'argomento è nullo
-     * @throws IOException in caso di problemi in apertura/scrittura/chiusura file
+     * @throws IOException              in caso di problemi in apertura/scrittura/chiusura file
      */
     public static void saveArticlesToFile(Iterator<SimpleArticle> iterator) throws IOException {
         if (iterator == null) {
@@ -37,7 +38,7 @@ public class AssetsUtils {
                 FileWriter writer = new FileWriter(file, true);
                 CSVPrinter csvPrinter = new CSVPrinter(writer, csvFileFormat);
         ) {
-            if(!existed)
+            if (!existed)
                 csvPrinter.printRecord("Title", "Body");
             while (iterator.hasNext()) {
                 SimpleArticle simpleArticle = iterator.next();
@@ -49,9 +50,10 @@ public class AssetsUtils {
 
     /**
      * Carica gli articoli salvati sul file specificato in {@link #filePath filePath}
+     *
      * @return articoli caricati da salvataggio
      * @throws IllegalArgumentException se {@link #filePath filePath} nonè impostato
-     * @throws IOException in caso di problemi in apertura/lettura/chiusura file
+     * @throws IOException              in caso di problemi in apertura/lettura/chiusura file
      */
     public static List<SimpleArticle> loadArticlesFromFile() throws IllegalArgumentException, IOException {
         if (filePath == null || filePath.isEmpty()) {
@@ -71,12 +73,13 @@ public class AssetsUtils {
 
     /**
      * Carica una stoplist da file locale
+     *
      * @param stopListFilePath l'URL assoluto della stoplist
      * @return lista di stop words
      * @throws FileNotFoundException se il file indicato non viene trovato
      */
     public static List<String> loadStopList(String stopListFilePath) throws FileNotFoundException {
-        if(stopListFilePath == null)
+        if (stopListFilePath == null)
             throw new IllegalArgumentException("Null argument");
         List<String> stopWords;
         try (Scanner scan = new Scanner(new File(stopListFilePath))) {
@@ -90,14 +93,15 @@ public class AssetsUtils {
 
     /**
      * Salva una lista di {@link WeightedToken WeightedToken} su file
+     *
      * @param weightedTokens valori da scrivere/salvare su file
-     * @param fileName su cui salvare i dati
-     * @param wordsToPrint numero massimo coppie parola peso da salvare su file
+     * @param fileName       su cui salvare i dati
+     * @param wordsToPrint   numero massimo coppie parola peso da salvare su file
      * @throws IOException in caso di problemi in apertura/scrittura/chiusura file
      */
 
     public static void saveWeightedWords(List<WeightedToken> weightedTokens, String fileName, int wordsToPrint) throws IOException {
-        if(weightedTokens == null || fileName == null)
+        if (weightedTokens == null || fileName == null)
             throw new IllegalArgumentException("Null argument / arguments");
         Iterator<WeightedToken> weightedTokenIterator = weightedTokens.iterator();
         try (

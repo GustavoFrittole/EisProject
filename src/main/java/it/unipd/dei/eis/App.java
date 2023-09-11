@@ -22,8 +22,8 @@ import java.util.Properties;
  * Permette all'utente di interfacciarsi
  * alle funzionalità dell'app tramite cli
  */
-    //NOTA: in realtà permette anche l'interazione tra le varie parti/classi/moduli
-    //      il che si sarebbe potuto implementare a parte (es. pattern controller).
+//NOTA: in realtà permette anche l'interazione tra le varie parti/classi/moduli
+//      il che si sarebbe potuto implementare a parte (es. pattern controller).
 public class App {
     private static Options options;
     private static CommandLine cmd;
@@ -33,7 +33,7 @@ public class App {
     private static void loadOptions() {
         options = new Options();
         options.addOption(new Option("h", "help",
-                 false, "Print the help"));
+                false, "Print the help"));
         options.addOption(new Option("sa", "save-articles",
                 false, "Retrive articles from source and save them on a local file"));
         options.addOption(new Option("et", "extract-terms",
@@ -59,13 +59,13 @@ public class App {
         if (formatter == null)
             formatter = new HelpFormatter();
         formatter.printHelp("app -sa -{ga, cf} <optional_argument> [options]" +
-                "\tto retrieve and save, or\n" +
-                "app -et [options]" +
-                "\tto parse and save, or\n" +
-                "app -sa -{ga, cf} <optional_argument> -et [options]" +
-                "\tto do both\n" +
-                "\tOPTIONS:\n"
-                ,options);
+                        "\tto retrieve and save, or\n" +
+                        "app -et [options]" +
+                        "\tto parse and save, or\n" +
+                        "app -sa -{ga, cf} <optional_argument> -et [options]" +
+                        "\tto do both\n" +
+                        "\tOPTIONS:\n"
+                , options);
     }
 
     private static CommandLine parseCmd(String[] args) {
@@ -107,7 +107,7 @@ public class App {
             } catch (IOException e) {
                 System.err.println("ERROR - Cannot load default configuration:\n" + e.getMessage());
                 return false;
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 System.err.println("ERROR - No property file has been specified and no default configuration has benn set:\n" + e.getMessage());
                 return false;
             } finally {
@@ -123,7 +123,7 @@ public class App {
         return true;
     }
 
-    private static boolean retrieveAndSave(){
+    private static boolean retrieveAndSave() {
         List<SourceWrapper> sourceWrappers = new ArrayList<>();
         if (cmd.hasOption("ga")) {
             //Unnecessary
@@ -144,7 +144,7 @@ public class App {
             String csvFileUrl = cmd.getOptionValue("cf");
             if (csvFileUrl == null)
                 csvFileUrl = properties.getProperty("csv_file_url");
-            sourceWrappers.add( new CSVWrapper(csvFileUrl,
+            sourceWrappers.add(new CSVWrapper(csvFileUrl,
                     Integer.parseInt(properties.getProperty("csv_file_articles"))));
         }
 
@@ -155,7 +155,7 @@ public class App {
             return false;
         }
         try {
-            for(SourceWrapper sourceWrapper : sourceWrappers){
+            for (SourceWrapper sourceWrapper : sourceWrappers) {
                 sourceWrapper.retriveArticles();
             }
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class App {
             return false;
         }
         try {
-            for(SourceWrapper sourceWrapper : sourceWrappers){
+            for (SourceWrapper sourceWrapper : sourceWrappers) {
                 AssetsUtils.saveArticlesToFile(sourceWrapper.iterator());
             }
         } catch (IOException | IllegalArgumentException e) {

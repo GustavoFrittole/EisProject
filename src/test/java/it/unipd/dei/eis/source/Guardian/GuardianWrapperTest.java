@@ -8,12 +8,13 @@ class GuardianWrapperTest {
     //Difficile da rendere autonoma dall' API client senza modifiche
     //  strutturali non desiderabili
     private static String yorApiKey = "";
+
     @Test
     void retriveArticlesExampleTest() {
         int artPerPage = 3, totPages = 3;
-        GuardianWrapper guardianWrapper= new GuardianWrapper(yorApiKey, "random query", artPerPage, totPages);
+        GuardianWrapper guardianWrapper = new GuardianWrapper(yorApiKey, "random query", artPerPage, totPages);
         guardianWrapper.retriveArticles();
-        for(int i = 0; i < artPerPage*totPages; i++)
+        for (int i = 0; i < artPerPage * totPages; i++)
             assertNotNull(guardianWrapper.getArticle(0));
     }
 
@@ -30,7 +31,7 @@ class GuardianWrapperTest {
     @Test
     void retriveArticlesTooManyPagesTest() {
         int bigNumber = 10000;
-        GuardianWrapper guardianWrapper= new GuardianWrapper(yorApiKey, "randomquery", 200, 10000);
+        GuardianWrapper guardianWrapper = new GuardianWrapper(yorApiKey, "random query", 200, 10000);
         guardianWrapper.retriveArticles();
         assertTrue(guardianWrapper.getTotPages() < bigNumber);
     }

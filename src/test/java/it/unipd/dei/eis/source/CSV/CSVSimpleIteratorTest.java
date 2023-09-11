@@ -1,11 +1,12 @@
 package it.unipd.dei.eis.source.CSV;
 
 import it.unipd.dei.eis.source.SimpleArticle;
-import it.unipd.dei.eis.source.SimpleArticleIterator;
 import org.junit.jupiter.api.Test;
+
 import java.util.Iterator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +20,7 @@ class CSVSimpleIteratorTest {
         Iterator<SimpleArticle> csvSimpleArticleIterator = new CSVSimpleIterator(mockeCsvWrapper);
         assertTrue(csvSimpleArticleIterator.hasNext());
     }
+
     @Test
     void hasNextNullTest() {
         CSVWrapper mockeCsvWrapper = mock(CSVWrapper.class);
@@ -27,6 +29,7 @@ class CSVSimpleIteratorTest {
         Iterator<SimpleArticle> csvSimpleArticleIterator = new CSVSimpleIterator(mockeCsvWrapper);
         assertFalse(csvSimpleArticleIterator.hasNext());
     }
+
     @Test
     void hasNextOutOfRangeTest() {
         CSVWrapper mockeCsvWrapper = mock(CSVWrapper.class);

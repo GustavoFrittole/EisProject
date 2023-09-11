@@ -2,9 +2,8 @@ package it.unipd.dei.eis.source.CSV;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CSVWrapperTest {
     @Test
@@ -12,6 +11,7 @@ class CSVWrapperTest {
         CSVWrapper csvWrapper = new CSVWrapper("this/path/does/not/exist.txt", 3);
         assertThrows(RuntimeException.class, csvWrapper::retriveArticles);
     }
+
     @Test
     void retriveArticlesExampleTest() {
         CSVWrapper csvWrapper = new CSVWrapper("src/test/resources/testCsv.csv", 3);
@@ -23,6 +23,7 @@ class CSVWrapperTest {
         assertTrue(csvWrapper.getSimpleArticle(2).getTitle().equals("Title3"));
         assertTrue(csvWrapper.getSimpleArticle(2).getBody().equals("Body3"));
     }
+
     @Test
     public void getSimpleArticleOutOfBoundsTests() {
         CSVWrapper csvWrapper = new CSVWrapper("src/test/resources/testCsv.csv", 3);
@@ -45,6 +46,7 @@ class CSVWrapperTest {
                 csvWrapper.getSimpleArticle(0).getTitle().equals("Title1")
         );
     }
+
     void retriveArticlesBigRequestTest() {
         CSVWrapper csvWrapper = new CSVWrapper("src/test/resources/testCsv.csv", 6);
         csvWrapper.retriveArticles();

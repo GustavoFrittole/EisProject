@@ -10,7 +10,6 @@ public class GuardianSimpleIterator implements SimpleArticleIterator {
     private int current = 0;
 
     /**
-     *
      * @param guardianWrapper iterazione
      * @throws IllegalArgumentException se l'argomento è nullo
      */
@@ -29,7 +28,6 @@ public class GuardianSimpleIterator implements SimpleArticleIterator {
     }
 
     /**
-     *
      * @return il prossimo elemento dell'iterazione
      * o null se {@link #hasNext() hasNext()} ritorna false
      */

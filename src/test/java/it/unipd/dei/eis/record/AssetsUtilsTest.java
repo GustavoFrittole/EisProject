@@ -2,9 +2,7 @@ package it.unipd.dei.eis.record;
 
 import it.unipd.dei.eis.analyze.WeightedToken;
 import it.unipd.dei.eis.source.SimpleArticle;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -25,6 +23,7 @@ class AssetsUtilsTest {
             AssetsUtils.saveWeightedWords(new ArrayList<WeightedToken>(), filePath, 6);
         });
     }
+
     @Test
     void saveArticlesToFileTestInvalidPathTest() {
         filePath = "this/path/does/not/exist.txt";
@@ -33,12 +32,14 @@ class AssetsUtilsTest {
             AssetsUtils.saveArticlesToFile(new ArrayList<SimpleArticle>().iterator());
         });
     }
+
     @Test
     void loadArticlesFromFileInvalidPathTest() {
         filePath = "this/path/does/not/exist.txt";
         AssetsUtils.setFilePath(filePath);
         assertThrows(IOException.class, AssetsUtils::loadArticlesFromFile);
     }
+
     @Test
     void saveWeightedWordsValidArgumentsTest() {
         filePath = "src/test/resources/record.txt";
@@ -82,6 +83,7 @@ class AssetsUtilsTest {
             throw new RuntimeException(e);
         }
     }
+
     @Test
     void saveArticlesToFileTest() {
         filePath = filePath = "src/test/resources/testAAS.csv";
@@ -105,7 +107,7 @@ class AssetsUtilsTest {
             assertEquals(scan.nextLine(), "This is a title,This is a body");
             assertEquals(scan.nextLine(), "\"This is, \"\"another\"\", title\",This is another a body");
             assertEquals(scan.nextLine(), "Third,Article");
-            if(scan.hasNextLine()) {
+            if (scan.hasNextLine()) {
                 assertEquals(scan.nextLine(), "");
                 assertFalse(scan.hasNextLine());
             }
@@ -137,7 +139,7 @@ class AssetsUtilsTest {
     void loadStopListValidArgumentTest() {
         Iterator<String> stopWords = null;
         try {
-             stopWords= AssetsUtils.loadStopList("src/test/resources/stoplist.txt").iterator();
+            stopWords = AssetsUtils.loadStopList("src/test/resources/stoplist.txt").iterator();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -149,16 +151,16 @@ class AssetsUtilsTest {
                 "after",
                 "another"
         }).iterator();
-        while(stopWords.hasNext() || expected.hasNext()){
+        while (stopWords.hasNext() || expected.hasNext()) {
             assertEquals(stopWords.next(), expected.next());
         }
     }
 
     @AfterEach
-    void cleanUp(){
-        if(filePath != null) {
+    void cleanUp() {
+        if (filePath != null) {
             File file = new File(filePath);
-            if(file.exists())
+            if (file.exists())
                 file.delete();
         }
     }
