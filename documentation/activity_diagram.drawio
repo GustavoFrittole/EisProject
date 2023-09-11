@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-09-11T17:22:16.752Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="NjXKKMaOneFC0fBwFpQ0" version="21.7.4" type="device">
+<mxfile host="app.diagrams.net" modified="2023-09-11T17:43:36.497Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="9iiJ2aqwdHO_baZpP5vG" version="21.7.4" type="device">
   <diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">
     <mxGraphModel dx="1050" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -185,7 +185,7 @@
         <mxCell id="xers-O8al9yBKqwTxHX6-40" value="estrazione termini più pesanti" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=100;height=30;" vertex="1" parent="1">
           <mxGeometry x="410" y="342.5" width="200" height="387.5" as="geometry" />
         </mxCell>
-        <mxCell id="xers-O8al9yBKqwTxHX6-41" value="estrazione termini più pesanti" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=100;height=30;" vertex="1" parent="1">
+        <mxCell id="xers-O8al9yBKqwTxHX6-41" value="download articoli da una o più sorgenti" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=110;height=28;" vertex="1" parent="1">
           <mxGeometry x="660" y="342.5" width="200" height="387.5" as="geometry" />
         </mxCell>
         <mxCell id="xers-O8al9yBKqwTxHX6-42" style="edgeStyle=orthogonalEdgeStyle;html=1;labelBackgroundColor=none;endArrow=open;endSize=8;strokeColor=#ff0000;fontFamily=Verdana;fontSize=12;align=left;" edge="1" parent="1" source="xers-O8al9yBKqwTxHX6-41" target="xers-O8al9yBKqwTxHX6-40">
