@@ -122,7 +122,7 @@ funzionamento del programma non è assicurato
 
 ### DOCUMENTAZIONE
 
-##### Dipendenze
+#### Dipendenze
 
 - Test
     - Junit Jupiter + Mockito;
@@ -132,7 +132,7 @@ funzionamento del programma non è assicurato
     - The Guardian API Client: interazione con le API della testata giornalistica,
       versione personalizzata tramite fork.
 
-Per maggiori dettagli (es. versione delle dipendenze usate) visitare la documentazione generata tramite Maven Site
+Per ulteriori dettagli (es. versione delle dipendenze usate) visitare la documentazione generata tramite Maven Site
 Plugin.
 Per farlo, eseguire i comandi
 
@@ -144,6 +144,15 @@ Per generare i javadoc, che saranno presenti nel sito sotto la voce reports,
 
 Per generare il sito.
 Locazione del file index: target/site/index.html.
+
+#### Tests
+Sono presenti test sulle unità: viene testato il funzionamento e alcuni
+casi estremi di tutti i metodi pubblici con particolari funzionalità.
+Nota: i test riguardanti la classe GuardianWrapper non passeranno senza inserire 
+una api kay valida nello stesso file di testing. 
+È anche presente un test di sistema (per praticità evita la source The Guardian,
+quindi non necessita di api key) da cui possono essere dedotte le principali funzionalità
+e interazioni tra le componenti del progetto.
 
 #### Ulteriori documenti
 
