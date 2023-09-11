@@ -52,19 +52,19 @@ class WeightedTokenTest {
     }
 
     @Test
-    void equalsTestValidArgument() {
+    void equalsTestValidArgumentTest() {
         assertEquals(weightedToken, new WeightedToken("word", 2));
     }
 
     @Test
-    void equalsTestInvalidArgument() {
+    void equalsTestInvalidArgumentTest() {
         assertThrows(NullPointerException.class, () -> {
             weightedToken.equals(null);
         });
     }
 
     @Test
-    void compareToTestInvalidArgument() {
+    void compareToTestInvalidArgumentTest() {
         assertThrows(NullPointerException.class, () -> {
             weightedToken.compareTo(null);
         });
