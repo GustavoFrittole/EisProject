@@ -5,7 +5,6 @@ import it.unipd.dei.eis.source.SourceWrapper;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -17,17 +16,16 @@ import java.util.Iterator;
  */
 public class CSVWrapper implements SourceWrapper {
 
-    private int articlesNumber;
     private final String csvFileUrl;
+    private int articlesNumber;
     private SimpleArticle[] articles;
 
     /**
-     *
-     * @param csvFileUrl file da cui reperire gli articoli
+     * @param csvFileUrl     file da cui reperire gli articoli
      * @param articlesNumber numero massimo di articoli da reperire dal file
      */
     public CSVWrapper(String csvFileUrl, int articlesNumber) {
-        if(csvFileUrl == null)
+        if (csvFileUrl == null)
             throw new IllegalArgumentException("Null argument");
         this.csvFileUrl = csvFileUrl;
         this.articlesNumber = articlesNumber;
@@ -41,6 +39,7 @@ public class CSVWrapper implements SourceWrapper {
     /**
      * Legge {@link #articlesNumber articlesNumber} articoli dal dato {@link #csvFileUrl file}
      * e li conserva in {@link #articles articles}.
+     *
      * @throws RuntimeException in caso di problemi in apertura/lettura/chiusura file
      */
     //si sarebbe potuto cedere la responsabilità ad AssetsUtil e gestire meglio le eccezioni
@@ -65,6 +64,7 @@ public class CSVWrapper implements SourceWrapper {
 
     /**
      * Accesso agli articoli ottenuti tramite indice
+     *
      * @param index indice articolo
      * @return l'articolo che si trova al dato indice o
      * null se l'elemento non è popolato è o fuori range
@@ -74,6 +74,7 @@ public class CSVWrapper implements SourceWrapper {
             return null;
         return articles[index];
     }
+
     public int getArticlesNumber() {
         return articlesNumber;
     }

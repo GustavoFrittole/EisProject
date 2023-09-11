@@ -15,10 +15,11 @@ public class ArticleAnalyzer {
      * Imposta una lista di parole che non saranno contate nelle successive esecuzioni
      * dei metodi {@link #countOccurrences(Iterable) countOccurrences} e
      * {@link #countOccurrencesPerArticle(Iterable) countOccurrencesPerFIle}
+     *
      * @param stopList lista delle stop words
      */
     public static void setStopList(List<String> stopList) {
-        if(stopList == null)
+        if (stopList == null)
             throw new IllegalArgumentException("Null argument");
         ArticleAnalyzer.stopList = stopList;
     }
@@ -26,6 +27,7 @@ public class ArticleAnalyzer {
     /**
      * Estrae le parole utilizzate nei dati articoli e associa a esse un peso.
      * Il peso corrisponde al numero di volte in cui appaiono complessivamente.
+     *
      * @param iterable struttura contenente gli articoli da analizzare
      * @return una lista di WeightedToken, ovvero coppie parola-peso
      */
@@ -41,15 +43,16 @@ public class ArticleAnalyzer {
      * Tutti i caratteri diversi da lettere sono ignorati.
      * Non è cap sensitive.
      * Il peso corrisponde al numero di documenti in cui appaiono.
+     *
      * @param iterable struttura contenente gli articoli da analizzare
      * @return una lista di {@link WeightedToken WeightedToken}
      * @throws IllegalArgumentException se l'argomento è nullo
      */
     public static List<WeightedToken> countOccurrencesPerArticle(Iterable<SimpleArticle> iterable) {
-        if(iterable == null)
+        if (iterable == null)
             throw new IllegalArgumentException("Null argument");
         List<Set<String>> wordsPerArticles = new LinkedList<>();
-        for(SimpleArticle simpleArticle : iterable){
+        for (SimpleArticle simpleArticle : iterable) {
             String[] words = (simpleArticle.getTitle() + " " + simpleArticle.getBody())
                     .replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
             wordsPerArticles.add(new HashSet<>(Arrays.asList(words)));
@@ -59,6 +62,7 @@ public class ArticleAnalyzer {
 
     /**
      * Funzione accessoria di {@link #countOccurrences(Iterable) countOccurrences}
+     *
      * @param iterable
      * @return
      */
@@ -75,11 +79,11 @@ public class ArticleAnalyzer {
 
     /**
      * Funzione accessoria di {@link #countOccurrences(Iterable) countOccurrences}
+     *
      * @param words
      * @return
      */
-    private static List<WeightedToken> wordsOccurrencesInString(String[] words)
-    {
+    private static List<WeightedToken> wordsOccurrencesInString(String[] words) {
         HashMap<String, Integer> map = new HashMap<>();
         for (String word : words) {
             int val = map.getOrDefault(word, 0);
@@ -97,11 +101,11 @@ public class ArticleAnalyzer {
 
     /**
      * Funzione accessoria di {@link #countOccurrencesPerArticle(Iterable) countOccurrencesPerFIle}
+     *
      * @param wordsInArticles
      * @return
      */
-    private static List<WeightedToken> wordsOccurrencesInSets(List<Set<String>> wordsInArticles)
-    {
+    private static List<WeightedToken> wordsOccurrencesInSets(List<Set<String>> wordsInArticles) {
         HashMap<String, Integer> map = new HashMap<>();
         for (Set<String> wordsInArticle : wordsInArticles) {
             for (String word : wordsInArticle) {
@@ -121,9 +125,10 @@ public class ArticleAnalyzer {
 
     /**
      * Funzione accessoria, rimuove le stop words se impostate
+     *
      * @param map
      */
-    private static void removeStopWords(Map<String, Integer> map){
+    private static void removeStopWords(Map<String, Integer> map) {
         if (stopList != null && !stopList.isEmpty()) {
             for (String stopWord : stopList) {
                 map.remove(stopWord);

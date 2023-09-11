@@ -14,12 +14,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class AppTest {
     private static String filePath = "src/test/resources/test.txt";
+
     @Test
-    public void systemTest(){
+    public void systemTest() {
         //use example
         SourceWrapper sourceWrapper = new CSVWrapper("src/test/resources/exampleCsv.csv", 100);
         sourceWrapper.retriveArticles();
@@ -29,7 +31,7 @@ class AppTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<SimpleArticle>articleList = null;
+        List<SimpleArticle> articleList = null;
         List<String> stopWords = null;
         try {
             articleList = AssetsUtils.loadArticlesFromFile();
@@ -51,7 +53,7 @@ class AppTest {
             assertEquals(scan.nextLine(), "this            \t2");
             assertEquals(scan.nextLine(), "is              \t2");
             assertEquals(scan.nextLine(), "body            \t2");
-            if(scan.hasNextLine()) {
+            if (scan.hasNextLine()) {
                 assertEquals(scan.nextLine(), "");
                 assertFalse(scan.hasNextLine());
             }
@@ -59,7 +61,7 @@ class AppTest {
             throw new RuntimeException(e);
         }
         //AssetsUtils farà append al fine dei risultati se non eliminato
-        if(!file.delete())
+        if (!file.delete())
             System.err.println("WARNING: src/test/resources/test.txt has to be deleted otherwise test will always fail.");
     }
 }

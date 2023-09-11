@@ -41,6 +41,7 @@ public class WeightedToken implements Comparable<WeightedToken> {
     /**
      * Precedenza al peso (this.weight - other.weight)
      * Se il peso è lo stesso confronta i token {@link String#compareTo(String) compareTo}
+     *
      * @param other the object to be compared.
      */
 
