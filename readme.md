@@ -43,10 +43,11 @@ Gli argomenti fondamentali sono:
 
 - (-sf) (ottenere i documenti dalla/e fonte/i da specificare e salvarli localmente)
 - (-et) (leggere i documenti salvati, analizzare i termini contenuti e salvare su file i risultati)
-  Almeno uno dei due deve essere presente.
 
-  java -jar target/EisProject-<version>-jar-with-dependencies.jar
-  -sf -cf [facoltativo-file] -pf [file_esterno_delle_proprietà]
+Almeno uno dei due deve essere presente.
+
+    java -jar target/EisProject-<version>-jar-with-dependencies.jar
+      -sf -cf [facoltativo-file] -pf [file_esterno_delle_proprietà]
 
 Recupera il numero impostato (nel file delle proprietà) di articoli dal file specificato
 (tramite argomenro o nel file delle proprietà) e li salva in un file locale.
@@ -104,7 +105,8 @@ funzionamento del programma non è assicurato
 ### NOTE SULL'UTILIZZO
 
 - Gli articoli vengono salvati su di un file, saved_articles.csv, che si trova nella cartella
-  corrente, da cui è stato eseguito il jar, la cui scrittura è impostata su append. Se si vuole eliminare
+  corrente (quello contenente i risultati, se generato), da cui è stato eseguito il jar, 
+  la cui scrittura è impostata su append. Se si vuole eliminare
   gli articoli salvati in precedenza sarà necessario eliminare tale file. Il programma
   non impedità il salvataggio di articoli in multipla copia.
 - Nel caso il numero di articoli richiesti dovesse superare il numero di articoli disponibili
