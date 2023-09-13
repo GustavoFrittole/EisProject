@@ -35,44 +35,15 @@ Il secondo file jar comprende anche tutte le dipendenze.
 
 (sostituire a \<version> la versione utilizzata)
 
-    java -jar target/EisProject-<version>-jar-with-dependencies.jar <args>
-
-#### Esempi di utilizzo
-
-Gli argomenti fondamentali sono:
-
-- (-sf) (ottenere i documenti dalla/e fonte/i da specificare e salvarli localmente)
-- (-et) (leggere i documenti salvati, analizzare i termini contenuti e salvare su file i risultati)
-
-Almeno uno dei due deve essere presente.
-
     java -jar target/EisProject-<version>-jar-with-dependencies.jar
-      -sf -cf [facoltativo-file] -pf [file_esterno_delle_proprietà]
 
-Recupera il numero impostato (nel file delle proprietà) di articoli dal file specificato
-(tramite argomenro o nel file delle proprietà) e li salva in un file locale.
-Se il file non è indicato nell'argomento allora viene letto dal file delle proprietà.
+#### Utilizzo
+Specificare gli step da eseguire. Se si ha attivato l'opzione recupero e salvataggio file,
+è necessario specificare anche le fonti. A destra delle spunte relative alle sources, è possibile 
+specificare i parametri di ricerca. Parametri di default e ulteriori impostazioni sono disponibili 
+nel file delle proprietà. 
 
-    java -jar target/EisProject-<version>-jar-with-dependencies.jar
-        -sf -ga [facoltativo-query] -et
 
-Recupera il numero impostato (nel file delle proprietà) di articoli tramite le API
-di The Guardian Open Platform e li salva in un file locale.
-Se la query non è indicata nell'argomento allora viene letta dal file delle proprietà.
-Successivamente legge tale file, e stampa su di un altro file una lista dei termini
-presenti associati al loro peso (numero di documenti in cui appaiono).
-
-    java -jar target/EisProject-<version>-jar-with-dependencies.jar
-        -et
-
-Legge il file su cui sono stati precedentemente salvati degli articoli
-e stampa su di un altro file una lista dei termini
-presenti associati al loro peso (numero di documenti in cui appaiono).
-
-    java -jar target/EisProject-<version>-jar-with-dependencies.jar
-        -sf -ga [facoltativo-query] -cf [facoltativo-file]
-
-Come sopra specificando fonti multiple.
 
 #### File delle proprietà
 
