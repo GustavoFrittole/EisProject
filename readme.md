@@ -105,10 +105,10 @@ funzionamento del programma non è assicurato
 ### NOTE SULL'UTILIZZO
 
 - Gli articoli vengono salvati su di un file, saved_articles.csv, che si trova nella cartella
-  corrente (quello contenente i risultati, se generato), da cui è stato eseguito il jar, 
+  corrente (la stessa che contiene anche i risultati, se generati), da cui è stato eseguito il jar, 
   la cui scrittura è impostata su append. Se si vuole eliminare
   gli articoli salvati in precedenza sarà necessario eliminare tale file. Il programma
-  non impedità il salvataggio di articoli in multipla copia.
+  non impedirà il salvataggio di articoli in multipla copia.
 - Nel caso il numero di articoli richiesti dovesse superare il numero di articoli disponibili
   dalla corrispettiva source, i documenti ottenuti saranno tutti i disponibili.
 - Il formato della stop list deve essere lo stesso di quella fornita in
