@@ -1,20 +1,39 @@
 package it.unipd.dei.eis.UI;
 
 public class Options {
-    public Options(String filePath, String query, boolean ga, boolean cf, boolean sf, boolean rt) {
-        this.filePath = filePath;
+
+    private String csvFilePath;
+    private String confFilePath;
+    private String query;
+    private boolean ga;
+    private boolean cf;
+    private boolean sf;
+    private boolean rt;
+
+    public Options(String csvFilePath, String confFilePath, String query, boolean ga, boolean cf, boolean sf, boolean rt) {
+        this.csvFilePath = csvFilePath;
+        this.confFilePath = confFilePath;
         this.query = query;
         this.ga = ga;
         this.cf = cf;
         this.sf = sf;
         this.rt = rt;
     }
-    public String getFilePath() {
-        return filePath;
+
+    public String getCsvFilePath() {
+        return csvFilePath;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setCsvFilePath(String csvFilePath) {
+        this.csvFilePath = csvFilePath;
+    }
+
+    public String getConfFilePath() {
+        return confFilePath;
+    }
+
+    public void setConfFilePath(String confFilePath) {
+        this.confFilePath = confFilePath;
     }
 
     public String getQuery() {
@@ -56,11 +75,4 @@ public class Options {
     public void setRt(boolean rt) {
         this.rt = rt;
     }
-
-    private String filePath;
-    private String query;
-    private boolean ga;
-    private boolean cf;
-    private boolean sf;
-    private boolean rt;
 }

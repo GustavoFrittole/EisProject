@@ -8,9 +8,12 @@ import it.unipd.dei.eis.source.Guardian.GuardianWrapper;
 import it.unipd.dei.eis.source.SimpleArticle;
 import it.unipd.dei.eis.source.SourceWrapper;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -26,12 +29,12 @@ public class Controller {
 
     public void useModel(Options options) {
         mainFrame.logToTextArea("Loading configuration...");
-        if (!loadConfiguration()) {
+        if (!loadConfiguration(options.getConfFilePath())) {
             return;
         }
         if (options.isSf()) {
             mainFrame.logToTextArea("Retrieving and saving articles...");
-            if (!retrieveAndSave(options.isGa(), options.isCf(), options.getFilePath(), options.getQuery())) {
+            if (!retrieveAndSave(options.isGa(), options.isCf(), options.getCsvFilePath(), options.getQuery())) {
                 return;
             }
         }
@@ -42,13 +45,18 @@ public class Controller {
         }
         mainFrame.logToTextArea("All done");
     }
-    private boolean loadConfiguration() {
+    private boolean loadConfiguration(String confFilePath) {
         properties = new Properties();
         InputStream input = null;
         try {
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            input = loader.getResourceAsStream("application.properties");
-            properties.load(input);
+            if (confFilePath != null) {
+                input = Files.newInputStream(Paths.get(confFilePath));
+                properties.load(input);
+            } else {
+                ClassLoader loader = Thread.currentThread().getContextClassLoader();
+                input = loader.getResourceAsStream("application.properties");
+                properties.load(input);
+            }
         } catch (IOException e) {
             mainFrame.logToTextArea("ERROR - Cannot load default configuration:\n" + e.getMessage());
             return false;

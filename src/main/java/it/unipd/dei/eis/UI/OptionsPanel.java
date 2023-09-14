@@ -11,12 +11,15 @@ public class OptionsPanel extends JPanel implements ActionListener{
     private JCheckBox guardianSourceCheck;
     private JCheckBox analyzeCheck;
     private JCheckBox csvSourceCheck;
-    private JButton fileChooserButton;
+    private JButton csvFileChooserButton;
     private JFileChooser csvFileChooser;
+    private JButton confFileChooserButton;
+    private JFileChooser confFileChooser;
     private JTextField queryText;
     private JButton startButton;
     private MainFrame mainFrame;
-    private String filePath;
+    private String csvFilePath;
+    private String confFilePath;
     public OptionsPanel(MainFrame mainFrame){
         super();
 
@@ -71,15 +74,24 @@ public class OptionsPanel extends JPanel implements ActionListener{
         queryText.setDisabledTextColor(Color.gray);
         add(queryText);
 
-        fileChooserButton = new JButton("Select File");
-        fileChooserButton.setBounds(30+180, 75+110,200,30);
-        fileChooserButton.addActionListener(this);
-        fileChooserButton.setOpaque(false);
-        fileChooserButton.setEnabled(false);
-        fileChooserButton.setFocusable(false);
-        fileChooserButton.setFont(new Font("Arial Black", Font.BOLD,  12));
-        fileChooserButton.setBackground(Color.blue);
-        add(fileChooserButton);
+        csvFileChooserButton = new JButton(".csv File");
+        csvFileChooserButton.setBounds(30+180, 75+110,200,30);
+        csvFileChooserButton.addActionListener(this);
+        csvFileChooserButton.setOpaque(false);
+        csvFileChooserButton.setEnabled(false);
+        csvFileChooserButton.setFocusable(false);
+        csvFileChooserButton.setFont(new Font("Arial Black", Font.BOLD,  12));
+        csvFileChooserButton.setBackground(Color.blue);
+        add(csvFileChooserButton);
+
+        confFileChooserButton = new JButton("Config File");
+        confFileChooserButton.setBounds(30+440, 45+110,180,30);
+        confFileChooserButton.addActionListener(this);
+        confFileChooserButton.setOpaque(false);
+        confFileChooserButton.setFocusable(false);
+        confFileChooserButton.setFont(new Font("Arial Black", Font.BOLD,  12));
+        confFileChooserButton.setBackground(Color.blue);
+        add(confFileChooserButton);
 
         startButton = new JButton("Start");
         startButton.setBounds(30+440, 75+110,180,30);
@@ -91,6 +103,8 @@ public class OptionsPanel extends JPanel implements ActionListener{
 
         csvFileChooser = new JFileChooser();
 
+        confFileChooser = new JFileChooser();
+
     }
 
     @Override
@@ -99,16 +113,21 @@ public class OptionsPanel extends JPanel implements ActionListener{
             guardianSourceCheck.setEnabled(saveCheck.isSelected());
             csvSourceCheck.setEnabled(saveCheck.isSelected());
             queryText.setEnabled(saveCheck.isSelected());
-            fileChooserButton.setEnabled(saveCheck.isSelected());
+            csvFileChooserButton.setEnabled(saveCheck.isSelected());
 
-        }else if(e.getSource() == fileChooserButton)
+        }else if(e.getSource() == csvFileChooserButton)
         {
             if(csvFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-                filePath = csvFileChooser.getSelectedFile().getAbsolutePath();
+                csvFilePath = csvFileChooser.getSelectedFile().getAbsolutePath();
+        }else if(e.getSource() == confFileChooserButton)
+        {
+            if(confFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                confFilePath = confFileChooser.getSelectedFile().getAbsolutePath();
         }else if(e.getSource() == startButton){
             startButton.setEnabled(false);
             mainFrame.startTask(new Options(
-                    filePath,
+                    csvFilePath,
+                    confFilePath,
                     queryText.getText(),
                     guardianSourceCheck.isSelected(),
                     csvSourceCheck.isSelected(),
