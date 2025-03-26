@@ -21,7 +21,7 @@ class GuardianWrapperTest {
     @Test
     void retriveArticlesOutOfBoundsTest() {
         int artPerPage = 3, totPages = 3;
-        GuardianWrapper guardianWrapper= new GuardianWrapper(yorApiKey, "random query", artPerPage, totPages);
+        GuardianWrapper guardianWrapper= new GuardianWrapper(yourApiKey, "random query", artPerPage, totPages);
         guardianWrapper.retriveArticles();
         assertNull(guardianWrapper.getArticle(-1));
         assertNull(guardianWrapper.getArticle(artPerPage*totPages));
