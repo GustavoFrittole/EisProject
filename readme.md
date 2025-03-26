@@ -7,7 +7,7 @@ Scaricare il progetto da github
     git clone https://github.com/GustavoFrittole/EisProject.git
 
 Prima di compilare, modificare il file delle proprietà
-compilando i campi a cui si è interessati (vedi sezione dedicata).
+compilando i campi a cui si è interessati (vedi sezione dedicata). Senza  una API KEY valida i test non potranno completare.
 
     EisProject/src/main/resources/application.properties.example
 
@@ -22,6 +22,7 @@ posizionarsi nella cartella principale e usare l'apposito comando Maven:
     cd EisProject
     mvn package
 
+Se non si dispone di un'API KEY ma si vuole procedere ugualmente, aggiungere l'opzione -Dmaven.test.skip=true per saltare i test.
 Nella cartella "target/" verranno generati
 
 - EisProject-\<version>.jar
